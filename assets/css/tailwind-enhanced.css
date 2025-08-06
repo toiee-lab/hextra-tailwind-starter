@@ -1,0 +1,35 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom utilities and components */
+@layer components {
+  .tl-hero-section {
+    @apply tl-min-h-screen tl-flex tl-items-center tl-justify-center tl-bg-gradient-to-br tl-from-blue-50 tl-to-indigo-100;
+  }
+  
+  .tl-card {
+    @apply tl-bg-white tl-rounded-lg tl-shadow-md tl-p-6 tl-border tl-border-gray-200;
+  }
+  
+  .tl-btn-primary {
+    @apply tl-bg-blue-600 tl-text-white tl-px-6 tl-py-2 tl-rounded-md tl-font-medium tl-transition-colors hover:tl-bg-blue-700 focus:tl-outline-none focus:tl-ring-2 focus:tl-ring-blue-500 focus:tl-ring-offset-2;
+  }
+  
+  .tl-btn-secondary {
+    @apply tl-bg-gray-200 tl-text-gray-900 tl-px-6 tl-py-2 tl-rounded-md tl-font-medium tl-transition-colors hover:tl-bg-gray-300 focus:tl-outline-none focus:tl-ring-2 focus:tl-ring-gray-500 focus:tl-ring-offset-2;
+  }
+}
+
+@layer utilities {
+  .tl-text-gradient {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .tl-shadow-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+}

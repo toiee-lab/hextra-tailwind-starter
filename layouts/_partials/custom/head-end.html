@@ -1,0 +1,10 @@
+{{ $tailwind := resources.Get "css/tailwind-enhanced.css" }}
+{{ if $tailwind }}
+  {{ if hugo.IsProduction }}
+    {{ $tailwind = $tailwind | postCSS | minify | fingerprint }}
+  {{ else }}
+    {{ $tailwind = $tailwind | postCSS | fingerprint }}
+  {{ end }}
+  <!-- Tailwind Enhanced CSS - 最後に読み込んでHextraのCSSを上書き -->
+  <link rel="stylesheet" href="{{ $tailwind.RelPermalink }}" data-enhanced="true">
+{{ end }}
