@@ -1,5 +1,9 @@
 # 🚀 Hextra + Tailwind CSS Starter Kit
 
+> [! WARNING]
+> まだ、作成途中なので利用しないでください
+
+
 Claude CodeでHugoサイトを構築するための、すぐに使えるスターターキットです。HextraテーマとTailwind CSSを統合し、効率的な開発環境を提供します。
 
 ## ✨ 特徴
