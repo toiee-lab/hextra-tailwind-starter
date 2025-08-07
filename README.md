@@ -30,19 +30,27 @@ Claude CodeでHugoサイトを構築するための、すぐに使えるスタ�
 
 ### 1. セットアップ
 
+最初に英語名でプロジェクト名を決めて下さい。例えば、 toiee.jp のサイトを作る予定なら、シンプルに「toiee-jp」などです。
+
 ```bash
 # リポジトリをクローン
-git clone <your-repo-url> my-site
-cd my-site
+git clone https://github.com/toiee-lab/hextra-tailwind-starter.git projectname 
+cd projectname
 
 # Hugo モジュールを初期化
-hugo mod init my-site
+hugo mod init projectname
 hugo mod get github.com/imfing/hextra
 hugo mod tidy
 
 # Node.js 依存関係をインストール
 npm install
+
+# 起動テスト
+npm run dev
 ```
+
+ブラウザで http://localhost:1313 を開いて確認してください。
+
 
 ### 2. 開発サーバー起動
 
