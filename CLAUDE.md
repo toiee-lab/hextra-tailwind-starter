@@ -250,7 +250,7 @@ linkTitle: "短縮タイトル"  # パンくずリスト用
 スクリーンリーダー専用クラスを使用：
 ```markdown
 {{< rawhtml >}}
-<span class="sr-only">Hugo 静的サイト Hextra テーマ Tailwind CSS</span>
+<span class="hx-sr-only">Hugo 静的サイト Hextra テーマ Tailwind CSS</span>
 {{< /rawhtml >}}
 ```
 
