@@ -811,7 +811,6 @@ Blockquote with attribution
 
 ### Alerts
 
-{{< new-feature version="v0.9.0" >}}
 
 Alerts are a Markdown extension based on the blockquote syntax that you can use to emphasize critical information.
 [GitHub-style alerts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) are supported.
@@ -1267,8 +1266,6 @@ def say_hello():
 ```
 
 ### Link to File
-
-{{< new-feature version="v0.9.2" >}}
 
 You can use the `base_url` attribute to provide a base URL that will be combined with the file name to generate a link.
 
