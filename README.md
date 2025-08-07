@@ -32,6 +32,8 @@ git clone <your-repo-url> my-site
 cd my-site
 
 # Hugo モジュールを初期化
+hugo mod init my-site
+hugo mod get github.com/imfing/hextra
 hugo mod tidy
 
 # Node.js 依存関係をインストール
