@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > [デモはこちら](https://hextra-tailwind-starter.netlify.app/)
-> 現在は、v0.1
+> 現在は、v0.2
 
 
 Claude CodeでHugoサイトを構築するための、すぐに使えるスターターキットです。HextraテーマとTailwind CSSを統合し、効率的な開発環境を提供します。
