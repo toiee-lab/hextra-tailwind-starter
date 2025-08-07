@@ -2,6 +2,7 @@
 /public/
 /resources/_gen/
 /hugo_stats.json
+.hugo_build.lock
 
 # Node.js
 node_modules/
@@ -21,3 +22,6 @@ Thumbs.db
 
 # temporary files
 /prompt*.md
+
+# os files
+.DS_Store
