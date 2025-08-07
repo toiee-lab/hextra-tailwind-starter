@@ -1,6 +1,6 @@
 # 🚀 Hextra + Tailwind CSS Starter Kit
 
-> [! WARNING]
+> [!WARNING]
 > まだ、作成途中なので利用しないでください
 
 
