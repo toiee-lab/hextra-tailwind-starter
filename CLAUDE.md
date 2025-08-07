@@ -59,21 +59,9 @@ module:
 | 用途 | 手法 | プレフィックス | 使用場所 |
 |------|------|-------------|---------|
 | **標準デザイン** | Hextraテーマ + Markdown | なし | 通常のコンテンツ |
-| **独自デザイン** | Tailwind CSS v3.4.3 + カスタムCSS | `tl-` | rawhtml内 |
+| **独自デザイン** | Tailwind CSS v3.4.3 + カスタムCSS | `tl-` | rawhtml内、landingレイアウト推奨 |
 
-### 自動クラス追加システム
-
-#### 自動検出の仕組み
-1. **コンテンツスキャニング**: PostCSS設定で以下のファイルを監視
-   - `./content/**/*.md` - Markdownコンテンツ
-   - `./layouts/**/*.html` - Hugoテンプレート
-   - `./static/**/*.html` - 静的HTMLファイル
-   - `./hugo_stats.json` - Hugo生成統計
-
-2. **リアルタイム処理**: Hugo開発サーバーで自動的にクラス生成
-3. **ビルド時最適化**: 未使用クラスの自動削除
-
-#### 独自デザイン使用例
+### 独自デザイン使用例
 ```html
 {{< rawhtml >}}
 <div class="tl-hero-section tl-gradient-primary">
@@ -82,69 +70,20 @@ module:
 </div>
 {{< /rawhtml >}}
 ```
+### 自動クラス追加システム
+
+1. **コンテンツスキャニング**: PostCSS設定で以下のファイルを監視
+   - `./content/**/*.md` - Markdownコンテンツ
+   - `./layouts/**/*.html` - Hugoテンプレート
+   - `./hugo_stats.json` - Hugo生成統計
+2. **リアルタイム処理**: Hugo開発サーバーで自動的にクラス生成
+3. **ビルド時最適化**: 未使用クラスの自動削除
 
 ---
 
 # 🛠️ 開発環境・セットアップ
 
-## 初期セットアップ
-```bash
-# リポジトリをクローン
-git clone <your-repo-url> my-site
-cd my-site
-
-# Hugoモジュールの依存関係を整理
-hugo mod tidy
-
-# Node.js依存関係をインストール（Tailwind CSS用）
-npm install
-```
-
-## 開発サーバー
-```bash
-# 開発サーバーを起動（推奨：キャッシュ無効化付き）
-hugo server --logLevel debug --disableFastRender -p 1313 --noHTTPCache
-
-# ドラフト記事も含めて起動
-hugo server -D --logLevel debug --disableFastRender -p 1313 --noHTTPCache
-
-# npm scriptsを使用
-npm run dev
-
-# 特定のポートで起動
-hugo server -p 8080 --noHTTPCache
-```
-
-## ビルドとテスト
-```bash
-# 本番用ビルド
-hugo --gc --minify
-
-# npm scriptsを使用
-npm run build
-
-# Hugoモジュールの更新
-hugo mod get -u
-hugo mod tidy
-```
-
-## Tailwind CSS関連コマンド
-```bash
-# PostCSSでTailwind CSSをコンパイル（開発時は自動）
-npx postcss assets/css/tailwind-enhanced.css -o assets/css/compiled/tailwind-enhanced.css
-
-# Tailwind CSSの更新
-npm update tailwindcss @tailwindcss/postcss
-```
-
-## Git ワークフロー
-
-| コマンド | 用途 | 備考 |
-|----------|------|------|
-| `hugo server -D` | ローカル開発サーバー起動 | ドラフト記事も表示 |
-| `hugo` | 本番用ビルド | `public/`フォルダに出力 |
-| `git add . && git commit -m "メッセージ"` | 変更のコミット | 適切なコミットメッセージを |
-| `git push origin main` | リモートへプッシュ | Netlifyが自動デプロイ |
+`README.md` を参照して下さい
 
 ---
 
@@ -173,38 +112,14 @@ project/
     └── tailwind-enhanced.css
 ```
 
-### ファイル構造の基本ルール
 
-| ファイル種別 | 役割 | URL生成 |
-|-------------|------|---------|
-| `_index.md` | セクションのインデックスページ | `/section/` |
-| 通常の`.md`ファイル | 個別ページ | `/section/page-name/` |
-| ディレクトリ構造 | URL構造と直結 | フォルダ階層 = URL階層 |
-| サイドバー | 自動生成 | アルファベット順（`weight`で調整可能） |
 
-## レイアウトシステム
+# Hugo および Hextra の設定 (hugo.yaml)
 
-### 利用可能なレイアウトタイプ
+ナビ、サイドバー、右サイドバー、フッターなどの設定を行う場合、 hugo.yaml を使います。
 
-| レイアウト | 用途 | 特徴 |
-|-----------|------|------|
-| **docs** | ドキュメント | サイドバー付き、階層構造対応 |
-| **blog** | ブログ投稿 | 時系列表示、アーカイブ機能 |
-| **default** | 通常ページ | シンプルな単体ページ |
-| **landing** | ランディングページ | カスタムデザイン用 |
+`project-docs/hextra-configuration.md` を必要なときに参照して、設定を行なって下さい。
 
-#### レイアウトの指定方法
-
-セクションの`_index.md`で`type`を指定：
-
-```yaml
----
-title: "ドキュメント"
-type: docs
----
-```
-
-## Hugo設定 (hugo.yaml)
 
 ```yaml
 # 基本設定
@@ -222,7 +137,7 @@ params:
   # ナビゲーション
   navbar:
     displayTitle: true
-    displayLogo: false
+    displayLogo: true
 
   # テーマ設定
   theme:
@@ -236,7 +151,7 @@ params:
 
   # 編集リンク
   editURL:
-    enable: true
+    enable: false
     base: "https://github.com/your-org/your-repo/edit/main/content"
 
 # メニュー設定
@@ -252,11 +167,40 @@ menu:
       weight: 3
       params:
         type: search
-    - name: GitHub
-      url: "https://github.com/your-org/your-repo"
-      weight: 4
-      params:
-        icon: github
+```
+
+
+---
+
+# 📝 コンテンツ作成ガイド
+
+## レイアウトシステム
+
+| レイアウト | 用途 | 特徴 |
+|-----------|------|------|
+| **docs** | ドキュメント | サイドバー付き、階層構造対応 |
+| **blog** | ブログ投稿 | 時系列表示、アーカイブ機能 |
+| **default** | 通常ページ | シンプルな単体ページ |
+| **landing** | ランディングページ | カスタムデザイン用 |
+
+### ファイル構造の基本ルール
+
+| ファイル種別 | 役割 | URL生成 |
+|-------------|------|---------|
+| `_index.md` | セクションのインデックスページ | `/section/` |
+| 通常の`.md`ファイル | 個別ページ | `/section/page-name/` |
+| ディレクトリ構造 | URL構造と直結 | フォルダ階層 = URL階層 |
+| サイドバー | 自動生成 | アルファベット順（`weight`で調整可能） |
+
+### セクションののページ専用設定
+
+セクションの`_index.md`で`type`を指定：
+
+```yaml
+---
+title: "ドキュメント"
+type: docs
+---
 ```
 
 ## Front Matter設定
@@ -278,72 +222,17 @@ linkTitle: "短縮タイトル"  # パンくずリスト用
 ---
 ```
 
----
-
-# 📝 コンテンツ作成ガイド
-
 ## Markdownとショートコード
 
-### GitHub Alerts（推奨）
-
-```markdown
-> [!NOTE]
-> 重要な情報をハイライト表示
-
-> [!TIP]
-> 便利なヒントやコツ
-
-> [!WARNING]
-> 注意が必要な内容
-
-> [!CAUTION]
-> 危険な操作や重大な注意点
-```
-
-### Hextraショートコード
-
-#### Steps（手順表示）
-```markdown
-{{% steps %}}
-
-### Step 1
-最初のステップの説明
-
-### Step 2
-次のステップの説明
-
-{{% /steps %}}
-```
-
-#### Cards（カード表示）
-```markdown
-{{< cards >}}
-  {{< card link="/docs/getting-started" title="Getting Started" >}}
-  {{< card link="/docs/features" title="Features" >}}
-{{< /cards >}}
-```
-
-#### Details（折りたたみ）
-```markdown
-{{< details title="詳細を見る" closed="true" >}}
-詳細な内容をここに記述
-{{< /details >}}
-```
-
-#### Callout（注意喚起）
-```markdown
-{{< callout type="info" >}}
-情報メッセージ
-{{< /callout >}}
-
-{{< callout type="warning" >}}
-警告メッセージ
-{{< /callout >}}
-```
+- 一般的なMarkdown、GFM が使える
+- Hextraテーマ独自のショートコードが使える
+- Hextraテーマ独自のショートコードを使う場合、`project-docs/hextra-markdown.md` を参考にする
+- 特に「 card や details の使い方」を間違うことが多いので、注意すること
+- iconを使う場合は、 `project-docs/hextra-icons.md` にあるものに限定するか、絵文字を使う
 
 ## HTMLとTailwind CSSを使ったカスタムデザイン
 
-rawhtmlショートコードを使用してカスタムHTML要素を追加：
+自由にデザインする、landing レイアウトを使うページでは、rawhtmlショートコードを使用して、`tl-` プレフィックス付きのTailwind CSSでデザインする。
 
 ```html
 {{< rawhtml >}}
@@ -406,8 +295,8 @@ rawhtmlショートコードを使用してカスタムHTML要素を追加：
 ```
 content/
 ├── docs/
-│   ├── introduction.md     # 英語（デフォルト）
-│   ├── introduction.ja.md  # 日本語
+│   ├── introduction.md     # 日本語（デフォルト）
+│   ├── introduction.en.md  # 英語
 │   └── introduction.fr.md  # フランス語
 ```
 

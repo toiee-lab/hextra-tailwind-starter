@@ -13,9 +13,7 @@ module.exports = {
     
     // JavaScript files
     './assets/**/*.js',
-    
-    // Static files
-    './static/**/*.{html,js}',
+
   ],
   safelist: [
     // Commonly used classes in safelist

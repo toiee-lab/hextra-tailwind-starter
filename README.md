@@ -51,6 +51,7 @@ npm run dev
 
 ブラウザで http://localhost:1313 を開いて確認してください。
 
+`Ctrl+C` で、サーバーを停止できます。
 
 ### 2. 開発サーバー起動
 
@@ -66,6 +67,16 @@ hugo server -D
 
 ブラウザで http://localhost:1313 を開いて確認してください。
 
+
+## Git ワークフロー
+
+| コマンド | 用途 | 備考 |
+|----------|------|------|
+| `hugo server -D` | ローカル開発サーバー起動 | ドラフト記事も表示 |
+| `hugo` | 本番用ビルド | `public/`フォルダに出力 |
+| `git add . && git commit -m "メッセージ"` | 変更のコミット | 適切なコミットメッセージを |
+| `git push origin main` | リモートへプッシュ | Netlifyが自動デプロイ |
+
 ### 3. ビルドとデプロイ
 
 ```bash
@@ -73,6 +84,17 @@ hugo server -D
 npm run build
 # または
 hugo --gc --minify
+```
+
+
+### Tailwind CSS関連コマンド
+
+```bash
+# PostCSSでTailwind CSSをコンパイル（開発時は自動）
+npx postcss assets/css/tailwind-enhanced.css -o assets/css/compiled/tailwind-enhanced.css
+
+# Tailwind CSSの更新
+npm update tailwindcss @tailwindcss/postcss
 ```
 
 ## 📁 プロジェクト構造
@@ -174,7 +196,7 @@ Hextraテーマの豊富なショートコードが利用できます：
 {{< /details >}}
 ```
 
-## 🤖 Claude Code 専用機能
+## 🤖 Claude Code 専用機能とヒント
 
 ### 専用エージェント
 
@@ -184,6 +206,13 @@ Hextraテーマの豊富なショートコードが利用できます：
 ### 権限設定
 
 `.claude/settings.local.json`でHugo/Tailwind開発に必要なコマンド権限を設定済み。
+
+### Claude Projectを活用
+
+1. Claude.ai でログインし、設定でGithubと連携を有効にしておく
+2. プロジェクトの新規作成
+3. ナレッジの追加で、 `https://github.com/imfing/hextra.git` を入れる
+4. `exampleSite/content/docs` を追加する（これにより、Hextraのショートコードなどを理解してもらえる）
 
 ## 🚀 デプロイ設定
 
@@ -255,9 +284,8 @@ FlexSearchが自動で設定されており、以下の要素をインデック�
 
 ## 🆘 サポート
 
-- Issues: [GitHub Issues](https://github.com/your-repo/issues)
-- Documentation: `content/docs/`
-- Community: [Discord](https://discord.gg/your-invite)
+- Issues: [GitHub Issues](https://github.com/toiee-lab/hextra-tailwind-starter/issues)
+
 
 ---
 
