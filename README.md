@@ -38,6 +38,9 @@ Claude CodeでHugoサイトを構築するための、すぐに使えるスタ�
 git clone https://github.com/toiee-lab/hextra-tailwind-starter.git projectname 
 cd projectname
 
+# リモート接続を削除
+git remote remove origin
+
 # Hugo モジュールを初期化
 hugo mod init projectname
 hugo mod get github.com/imfing/hextra
@@ -198,6 +201,8 @@ Hextraテーマの豊富なショートコードが利用できます：
 ```
 
 ## 🤖 Claude Code 専用機能とヒント
+
+Claude Codeを使って、Webサイトを構築しやすいように、専用の `CLAUDE.md` を作成しました。この内容をベースに、ご自身のプロジェクトに合わせて追記したり、作り直して下さい。あなたからの依頼を処理する際に、適切な動作をするように、細かく知識や、前提、情報源などを与えています。
 
 ### 専用エージェント
 
