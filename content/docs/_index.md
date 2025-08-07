@@ -1,9 +1,8 @@
 ---
 title: "ドキュメント"
-date: 2025-08-07T10:56:32+09:00
-type: docs
 weight: 1
-excludeSearch: true
+type: docs
 ---
 
-ここは、ドキュメントのトップです。
+Hextra + Tailwind CSSスターターキットの包括的なドキュメントです。
+モダンなドキュメントサイト構築のための機能とガイドを提供します。
