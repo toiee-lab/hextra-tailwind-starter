@@ -27,6 +27,11 @@ This file provides guidance for Claude Code (claude.ai/code) when working with t
 
 ## Content Creation Rules
 
+### Language
+
+- User's Language is Japanese. You should to write content in Japanese
+- If user instruct "Write contents in English", you can use English
+
 ### Important Notes
 - **NO H1 headers** in content (except landing layout) - Front Matter title is used as H1
 - Use `<!--more-->` for excerpts
@@ -57,6 +62,9 @@ toc: true               # Table of contents
 - **Custom**: Use `tl-` prefixed Tailwind classes in rawhtml
 
 ### Custom Design Example
+
+At first, set `layout: landing` into Front Matter.
+
 ```html
 {{< rawhtml >}}
 <div class="tl-hero-section tl-p-6">
@@ -65,9 +73,44 @@ toc: true               # Table of contents
 {{< /rawhtml >}}
 ```
 
+Custom Design is "自由にデザイン" in Japanese.
+
 **Note**: Responsive prefixes don't use `tl-`:
 - ✅ Correct: `md:tl-grid-cols-2`
 - ❌ Wrong: `tl-md:tl-grid-cols-2`
+
+## ⚠️ Tailwind CSS Critical Configuration
+
+### preflight: false の影響
+**重要**: `tailwind.config.js`で`preflight: false`が設定されているため、多くの標準Tailwindクラスが自動生成されません。
+
+### 手動追加が必要なクラス
+新しいTailwindクラスを使用する場合は、必ず`assets/css/tailwind-enhanced.css`に定義を追加してください：
+
+#### よく使うが追加が必要なクラス
+- **グラデーション**: 
+  - `tl-bg-gradient-to-*` (br, r, b, l, t など)
+  - `tl-from-*`, `tl-to-*`, `tl-via-*` (色指定)
+- **テキストグラデーション**:
+  - `tl-bg-clip-text`, `tl-text-transparent`
+- **アニメーション**:
+  - `tl-animate-*` (bounce, pulse, spin, fade-in など)
+- **トランスフォーム**:
+  - `tl-rotate-*`, `tl-scale-*`, `tl-translate-*`
+- **その他の効果**:
+  - `tl-backdrop-blur-*`, `tl-mix-blend-*`
+
+### 新しいページ/コンポーネント作成時のチェックリスト
+1. 使用するTailwindクラスをリストアップ
+2. `tailwind-enhanced.css`で定義確認
+3. 不足クラスをCSSファイルに追加
+4. `npm run build`でCSSをビルド
+5. ブラウザで表示確認
+
+### トラブルシューティング
+- **クラスが効かない場合**: `tailwind-enhanced.css`を確認
+- **ビルド後も反映されない**: `hugo_stats.json`をチェック
+- **開発時のヒント**: よく使うパターンは事前定義しておく
 
 ## Hextra Shortcodes
 
@@ -123,3 +166,4 @@ See `README.md` for setup instructions.
 3. **NEVER** proactively create documentation unless requested
 4. Use Markdown by default, HTML only when explicitly needed
 5. Check existing code patterns before implementing new features
+6. **ALWAYS** verify Tailwind classes are defined when using custom styles
