@@ -8,3 +8,14 @@
   <!-- Tailwind Enhanced CSS - 最後に読み込んでHextraのCSSを上書き -->
   <link rel="stylesheet" href="{{ $tailwind.RelPermalink }}" data-enhanced="true">
 {{ end }}
+
+{{ $searchImeFix := resources.Get "js/search-ime-fix.js" }}
+{{ if $searchImeFix }}
+  {{ if hugo.IsProduction }}
+    {{ $searchImeFix = $searchImeFix | minify | fingerprint }}
+  {{ else }}
+    {{ $searchImeFix = $searchImeFix | fingerprint }}
+  {{ end }}
+  <!-- 検索IME対応スクリプト - Hextra検索機能の後に読み込み -->
+  <script src="{{ $searchImeFix.RelPermalink }}" defer></script>
+{{ end }}
