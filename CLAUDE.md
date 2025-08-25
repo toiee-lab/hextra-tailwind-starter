@@ -123,7 +123,7 @@ Custom Design is "自由にデザイン" in Japanese.
 Add hidden keywords for search:
 ```markdown
 {{< rawhtml >}}
-<span class="hx-sr-only">keywords for search</span>
+<span class="hx:sr-only">keywords for search</span>
 {{< /rawhtml >}}
 ```
 

@@ -22,7 +22,7 @@ FlexSearchは確かに高速でしたが、日本語コンテンツでの検索�
 
 ```markdown
 {{< rawhtml >}}
-<span class="hx-sr-only">
+<span class="hx:sr-only">
 Hugo ヒューゴ 静的サイト static site generator SSG 
 Hextra ヘクストラ テーマ theme
 Tailwind CSS テイルウィンド スタイリング
@@ -141,7 +141,7 @@ Hugoの組み込み画像処理機能により、自動的にWebP変換とレス
 運用を通じて、技術選択の正しさを確信すると同時に、実際のユーザー体験の重要性を痛感しました。今後も継続的な改善を続けていきます！
 
 {{< rawhtml >}}
-<span class="hx-sr-only">
+<span class="hx:sr-only">
 運用 Operations 改善 Improvement パフォーマンス Performance 
 FlexSearch 検索最適化 Search Optimization モバイル Mobile
 ユーザビリティ Usability Netlify デプロイ Deploy

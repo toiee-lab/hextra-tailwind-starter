@@ -277,7 +277,7 @@ FlexSearchが自動で設定されており、以下の要素をインデック�
 
 ```markdown
 {{< rawhtml >}}
-<span class="hx-sr-only">検索用キーワード Claude AI Hugo 開発</span>
+<span class="hx:sr-only">検索用キーワード Claude AI Hugo 開発</span>
 {{< /rawhtml >}}
 ```
 

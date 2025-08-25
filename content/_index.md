@@ -304,5 +304,5 @@ layout: landing
 </div>
 
 <!-- 検索用キーワード（非表示） -->
-<span class="hx-sr-only">Hugo Hextra Tailwind CSS スターターキット 静的サイトジェネレーター ドキュメントサイト ブログ Claude Code AI支援開発 FlexSearch レスポンシブデザイン ダークモード 多言語対応 SEO最適化</span>
+<span class="hx:sr-only">Hugo Hextra Tailwind CSS スターターキット 静的サイトジェネレーター ドキュメントサイト ブログ Claude Code AI支援開発 FlexSearch レスポンシブデザイン ダークモード 多言語対応 SEO最適化</span>
 {{< /rawhtml >}}
