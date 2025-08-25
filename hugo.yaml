@@ -26,17 +26,30 @@ markup:
 
 menu:
   main:
-    - name: Documentation
-      pageRef: /docs
+    - identifier: sdk
+      name: Ref
       weight: 1
+    - identifier: go
+      name: Hextra ↗
+      url: https://imfing.github.io/hextra/
+      parent: sdk
+      weight: 2
+    - identifier: hugo
+      name: Hugo ↗
+      url: https://gohugo.io/
+      parent: sdk
+      weitght: 1
+    - name: Docs
+      pageRef: /docs
+      weight: 2
     - name: About
       pageRef: /about
-      weight: 2
+      weight: 3
     - name: Blog
       pageRef: /blog
-      weight: 3
-    - name: Search
       weight: 4
+    - name: Search
+      weight: 5
       params:
         type: search
 
@@ -52,6 +65,10 @@ params:
     displayCopyright: false
     displayPoweredBy: true
 
+  page:
+    tabs:
+      sync: true
+
   editURL:
     enable: false
     base: "https://github.com/your-org/your-repo/edit/main/content"
@@ -63,6 +80,10 @@ params:
       display: hover
   theme:
     displayToggle: true
+
+  blog:
+    list:
+      pagerSize: 20 # Posts per page
 
 # PostCSS設定
 postCSS:
