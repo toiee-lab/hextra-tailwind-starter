@@ -1,30 +1,30 @@
 # Hextra の設定 (hugo.yaml)
 
-Hugo はサイトのルートにある `hugo.yaml` から設定を読み込みます。
-この設定ファイルであなたのサイトのあらゆる側面を設定できます。
-利用可能な設定項目とベストプラクティスを網羅的に理解するには、GitHub 上のこのサイトの設定ファイル [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) を参照してください。
+Hugo reads its configuration from `hugo.yaml` in the root of your Hugo site.
+The config file is where you can configure all aspects of your site.
+Check out the config file for this site [`exampleSite/hugo.yaml`](https://github.com/imfing/hextra/blob/main/exampleSite/hugo.yaml) on GitHub to get a comprehensive idea of available settings and best practices.
 
 <!--more-->
 
-## ナビゲーション
+## Navigation
 
-### メニュー
+### Menu
 
-右上のメニューは設定ファイルの `menu.main` セクションで定義されます：
+Top right menu is defined under the `menu.main` section in the config file:
 
 ```yaml {filename="hugo.yaml"}
 menu:
   main:
-    - name: ドキュメント
+    - name: Documentation
       pageRef: /docs
       weight: 1
-    - name: ブログ
+    - name: Blog
       pageRef: /blog
       weight: 2
-    - name: このサイトについて
+    - name: About
       pageRef: /about
       weight: 3
-    - name: 検索
+    - name: Search
       weight: 4
       params:
         type: search
@@ -35,51 +35,58 @@ menu:
         icon: github
 ```
 
-メニュー項目にはいくつかの種類があります：
+There are different types of menu items:
 
-1. `pageRef` でサイト内のページにリンク
+1. Link to a page in the site with `pageRef`
    ```yaml
-   - name: ドキュメント
+   - name: Documentation
      pageRef: /docs
    ```
-2. `url` で外部URLにリンク
+2. Link to an external URL with `url`
    ```yaml
    - name: GitHub
      url: "https://github.com"
    ```
-3. `type: search` で検索バー
+3. Search bar with `type: search`
    ```yaml
-   - name: 検索
+   - name: Search
      params:
        type: search
    ```
-4. アイコン
+4. Icon Only
    ```yaml
    - name: GitHub
      params:
        icon: github
    ```
-5. テーマ切り替え
+5. Link with Icon
+   ```yaml
+   - name: Blog
+     params:
+       type: link
+       icon: rss
+   ```
+6. Theme Toggle
    ```yaml
     - name: Theme Toggle
       params:
         type: theme-toggle
         label: true # optional, default is false
    ```
-6. 言語スイッチャー
+7. Language Switcher
    ```yaml
-    - name: 言語スイッチャー
+    - name: Language Switcher
       params:
         type: language-switch
         label: true # optional, default is false
         icon: "globe-alt" # optional, default is "translate"
    ```
 
-これらのメニュー項目は `weight` パラメータを設定することで並べ替えられます。
+These menu items can be sorted by setting the `weight` parameter.
 
-### ネストされたメニュー
+### Nested Menus
 
-子メニュー項目を定義することでドロップダウンメニューを作成できます。親メニュー項目をクリックすると子メニューが表示されます。
+You can create dropdown menus by defining child menu items. Child menus appear when clicking on the parent menu item.
 
 ```yaml {filename="hugo.yaml"}
 menu:
@@ -96,12 +103,12 @@ menu:
       parent: sdk
 ```
 
-子メニュー項目は親の `identifier` 値を `parent` パラメータで指定する必要があります。
+Child menu items need to specify the `parent` parameter with the parent's `identifier` value.
 
-### ロゴとタイトル
+### Logo and Title
 
-デフォルトのロゴを変更するには、`hugo.yaml` を編集し、`static` ディレクトリ下のロゴファイルへのパスを追加します。
-オプションで、ロゴをクリックした際のリンク先や、ロゴの幅と高さ（ピクセル単位）を設定できます。
+To modify the default logo, edit `hugo.yaml` and add the path to your logo file under `static` directory.
+Optionally, you can change the link that users are redirected to when clicking on your logo, as well as set the width & height of the logo in pixels.
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -116,58 +123,58 @@ params:
       height: 20
 ```
 
-## サイドバー
+## Sidebar
 
-### メインサイドバー
+### Main Sidebar
 
-メインサイドバーはコンテンツディレクトリの構造から自動生成されます。
-詳細は [ファイルの整理](/docs/guide/organize-files) ページを参照してください。
+For the main sidebar, it is automatically generated from the structure of the content directory.
+See the [Organize Files](/docs/guide/organize-files) page for more details.
 
-単一ページを左サイドバーから除外するには、ページのフロントマターで `sidebar.exclude` パラメータを設定します：
+To exclude a single page from the left sidebar, set the `sidebar.exclude` parameter in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: 設定
+title: Configuration
 sidebar:
   exclude: true
 ---
 ```
 
-### 追加リンク
+### Extra Links
 
-サイドバーの追加リンクは設定ファイルの `menu.sidebar` セクションで定義されます：
+Sidebar extra links are defined under the `menu.sidebar` section in the config file:
 
 ```yaml {filename="hugo.yaml"}
 menu:
   sidebar:
-    - name: その他
+    - name: More
       params:
         type: separator
       weight: 1
-    - name: "このサイトについて"
+    - name: "About"
       pageRef: "/about"
       weight: 2
-    - name: "Hugo ドキュメント ↗"
+    - name: "Hugo Docs ↗"
       url: "https://gohugo.io/documentation/"
       weight: 3
 ```
 
-## 右サイドバー
+## Right Sidebar
 
-### 目次
+### Table of Contents
 
-目次はコンテンツファイルの見出しから自動生成されます。ページのフロントマターで `toc: false` を設定することで無効化できます。
+Table of contents is automatically generated from the headings in the content file. It can be disabled by setting `toc: false` in the front matter of the page.
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: 設定
+title: Configuration
 toc: false
 ---
 ```
 
-### ページ編集リンク
+### Page Edit Link
 
-ページ編集リンクを設定するには、設定ファイルで `params.editURL.base` パラメータを設定します：
+To configure the page edit link, we can set the `params.editURL.base` parameter in the config file:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -176,34 +183,34 @@ params:
     base: "https://github.com/your-username/your-repo/edit/main"
 ```
 
-編集リンクは提供されたURLをルートディレクトリとして各ページに対して自動生成されます。
-特定のページに対して編集リンクを設定したい場合は、ページのフロントマターで `editURL` パラメータを設定できます：
+The edit links will be automatically generated for each page based on the provided url as root directory.
+If you want to set edit link for a specific page, you can set the `editURL` parameter in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: 設定
+title: Configuration
 editURL: "https://example.com/edit/this/page"
 ---
 ```
 
-## フッター
+## Footer
 
-### 著作権表示
+### Copyright
 
-ウェブサイトのフッターに表示される著作権テキストを変更するには、`i18n/en.yaml` という名前のファイルを作成する必要があります。
-このファイルで、以下のように新しい著作権テキストを指定します：
+To modify the copyright text displayed in your website's footer, you'll need to create a file named `i18n/en.yaml`.
+In this file, specify your new copyright text as shown below:
 
 ```yaml {filename="i18n/en.yaml"}
-copyright: "© 2024 ここにあなたのテキスト"
+copyright: "© 2024 YOUR TEXT HERE"
 ```
 
-参考までに、GitHub リポジトリに [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) ファイルの例があります。また、著作権テキストには Markdown 形式を使用することもできます。
+For your reference, an example [`i18n/en.yaml`](https://github.com/imfing/hextra/blob/main/i18n/en.yaml) file can be found in the GitHub repository. Additionally, you could use Markdown format in the copyright text.
 
-## その他
+## Others
 
-### ファビコン
+### Favicon
 
-サイトの [ファビコン](https://ja.wikipedia.org/wiki/Favicon) をカスタマイズするには、[テーマのデフォルトファビコン](https://github.com/imfing/hextra/tree/main/static) を上書きするために `static` フォルダの下にアイコンファイルを配置します：
+To customize the [favicon](https://en.wikipedia.org/wiki/Favicon) for your site, place icon files under the `static` folder to override the [default favicons from the theme](https://github.com/imfing/hextra/tree/main/static):
 
 {{< filetree/container >}}
   {{< filetree/folder name="static" >}}
@@ -219,30 +226,30 @@ copyright: "© 2024 ここにあなたのテキスト"
   {{< /filetree/folder >}}
 {{< /filetree/container >}}
 
-#### 基本設定
+#### Basic Setup
 
-最低限、`static` フォルダに `favicon.svg` を含めてください。これがサイトのデフォルトファビコンとして使用されます。
+At minimum, include `favicon.svg` in your `static` folder. This will be used as the default favicon for your site.
 
-SVG 内で CSS メディアクエリを使用することで、システムのテーマ設定に応答する適応型 SVG ファビコンを作成できます。このアプローチは [適応型ファビコンの構築](https://web.dev/articles/building/an-adaptive-favicon) で説明されています。
+You can create an adaptive SVG favicon that responds to system theme preferences by using CSS media queries within the SVG itself, following the approach described in [Building an Adaptive Favicon](https://web.dev/articles/building/an-adaptive-favicon).
 
-#### ダークモード対応
+#### Dark Mode Support
 
-強化されたダークモードサポートのために、`favicon.svg` と一緒に `favicon-dark.svg` を `static` フォルダに追加してください。両方のファイルが存在する場合、Hextra は自動的に：
+For enhanced dark mode support, add `favicon-dark.svg` to your `static` folder alongside `favicon.svg`. When both files are present, Hextra will automatically:
 
-- ライトモードまたはテーマ設定が検出されない場合に `favicon.svg` を使用
-- ユーザーのシステムがダークモードに設定されている場合に `favicon-dark.svg` に切り替え
-- 自動切り替えのためにシステムの `prefers-color-scheme` 設定を尊重
+- Use `favicon.svg` for light mode or when no theme preference is detected
+- Switch to `favicon-dark.svg` when the user's system is set to dark mode
+- Respect the system's `prefers-color-scheme` setting for automatic switching
 
-ダークモードファビコンの切り替えは Firefox を含むすべての最新ブラウザで動作し、サイトのテーマにマッチしたシームレスな体験を提供します。
+The dark mode favicon switching works across all modern browsers, including Firefox, and provides a seamless experience that matches your site's theme.
 
-#### 追加フォーマット
+#### Additional Formats
 
-`favicon.ico` は一般的に古いブラウザ向けですが、最新のブラウザはスケーラビリティとファイルサイズの小ささが好まれる SVG ファビコンをサポートしています。
-必要に応じて [favicon.io](https://favicon.io/) や [favycon](https://github.com/ruisaraiva19/favycon) などのツールを使用して追加のファビコンフォーマットを生成できます。
+While `favicon.ico` is generally for older browsers, modern browsers support SVG favicons which are preferred for their scalability and small file size.
+Use tools like [favicon.io](https://favicon.io/) or [favycon](https://github.com/ruisaraiva19/favycon) to generate additional favicon formats if needed.
 
-### テーマ設定
+### Theme Configuration
 
-`theme` 設定を使用してデフォルトのテーマモードとトグルボタンを設定し、訪問者がライトモードとダークモードを切り替えられるようにします。
+Use the `theme` setting to configure the default theme mode and toggle button, allowing visitors to switch between light or dark mode.
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -252,34 +259,34 @@ params:
     displayToggle: true
 ```
 
-`theme.default` のオプション：
+Options for `theme.default`:
 
-- `light` - 常にライトモードを使用
-- `dark` - 常にダークモードを使用
-- `system` - オペレーティングシステムの設定と同期（デフォルト）
+- `light` - always use light mode
+- `dark` - always use dark mode
+- `system` - sync with the operating system setting (default)
 
-`theme.displayToggle` パラメータはテーマを変更するためのトグルボタンを表示します。
-`true` に設定すると、訪問者はデフォルト設定を上書きしてライトモードとダークモードを切り替えられます。
+The `theme.displayToggle` parameter allows you to display a toggle button for changing themes.
+When set to `true`, visitors can switch between light or dark mode, overriding the default setting.
 
-### ページ最終更新日
+### Page Last Modification
 
-ページの最終更新日を表示するには、`params.displayUpdatedDate` フラグを有効にします。Git コミット日付をソースとして使用するには、`enableGitInfo` フラグも有効にします。
+The date of the page's last modification can be displayed by enabling the `params.displayUpdatedDate` flag. To use Git commit date as the source, enable also the `enableGitInfo` flag.
 
-日付形式をカスタマイズするには、`params.dateFormat` パラメータを設定します。そのレイアウトは Hugo の [`time.Format`](https://gohugo.io/functions/time/format/) に準拠します。
+To customize the date format, set the `params.dateFormat` parameter. Its layout matches Hugo's [`time.Format`](https://gohugo.io/functions/time/format/).
 
 ```yaml {filename="hugo.yaml"}
-# Git コミットを解析
+# Parse Git commit
 enableGitInfo: true
 
 params:
-  # 最終更新日を表示
+  # Display the last modification date
   displayUpdatedDate: true
-  dateFormat: "2006年1月2日"
+  dateFormat: "January 2, 2006"
 ```
 
-### タグ
+### Tags
 
-ページタグを表示するには、設定ファイルで以下のフラグを設定します：
+To display page tags, set following flags in the config file:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -290,9 +297,9 @@ params:
     displayTags: true
 ```
 
-### ページ幅
+### Page Width
 
-ページの幅は設定ファイルの `params.page.width` パラメータでカスタマイズできます：
+The width of the page can be customized by the `params.page.width` parameter in the config file:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -301,35 +308,35 @@ params:
     width: wide
 ```
 
-利用可能なオプションは `full`、`wide`、`normal` の3つです。デフォルトではページ幅は `normal` に設定されています。
+There are three available options: `full`, `wide`, and `normal`. By default, the page width is set to `normal`.
 
-同様に、ナビゲーションバーとフッターの幅は `params.navbar.width` と `params.footer.width` パラメータでカスタマイズできます。
+Similarly, the width of the navbar and footer can be customized by the `params.navbar.width` and `params.footer.width` parameters.
 
-### FlexSearch インデックス
+### FlexSearch Index
 
-[FlexSearch](https://github.com/nextapps-de/flexsearch) を利用した全文検索はデフォルトで有効です。
-検索インデックスをカスタマイズするには、設定ファイルで `params.search.flexsearch.index` パラメータを設定します：
+Full-text search powered by [FlexSearch](https://github.com/nextapps-de/flexsearch) is enabled by default.
+To customize the search index, set the `params.search.flexsearch.index` parameter in the config file:
 
 ```yaml {filename="hugo.yaml"}
 params:
-  # 検索
+  # Search
   search:
     enable: true
     type: flexsearch
 
     flexsearch:
-      # インデックス対象: content | summary | heading | title
+      # index page by: content | summary | heading | title
       index: content
 ```
 
-`flexsearch.index` のオプション：
+Options for `flexsearch.index`:
 
-- `content` - ページの全文（デフォルト）
-- `summary` - ページの要約、詳細は [Hugo コンテンツ要約](https://gohugo.io/content-management/summaries/) を参照
-- `heading` - レベル1とレベル2の見出し
-- `title` - ページタイトルのみを含める
+- `content` - full content of the page (default)
+- `summary` - summary of the page, see [Hugo Content Summaries](https://gohugo.io/content-management/summaries/) for more details
+- `heading` - level 1 and level 2 headings
+- `title` - only include the page title
 
-検索トークン化をカスタマイズするには、設定ファイルで `params.search.flexsearch.tokenize` パラメータを設定します：
+To customize the search tokenize, set the `params.search.flexsearch.tokenize` parameter in the config file:
 
 ```yaml {filename="hugo.yaml"}
 params:
@@ -340,25 +347,25 @@ params:
       tokenize: forward
 ```
 
-[`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search) のオプション：
+Options for [`flexsearch.tokenize`](https://github.com/nextapps-de/flexsearch/#tokenizer-prefix-search):
 
-- `strict` - 単語全体をインデックス
-- `forward` - 前方方向に単語を増分的にインデックス
-- `reverse` - 両方向に単語を増分的にインデックス
-- `full` - すべての可能な組み合わせをインデックス
+- `strict` - index whole words
+- `forward` - incrementally index words in forward direction
+- `reverse` - incrementally index words in both directions
+- `full` - index every possible combination
 
-FlexSearch 検索インデックスからページを除外するには、ページのフロントマターで `excludeSearch: true` を設定します：
+To exclude a page from the FlexSearch search index, set the `excludeSearch: true` in the front matter of the page:
 
 ```yaml {filename="content/docs/guide/configuration.md"}
 ---
-title: 設定
+title: Configuration
 excludeSearch: true
 ---
 ```
 
-### Google アナリティクス
+### Google Analytics
 
-[Google アナリティクス](https://marketingplatform.google.com/about/analytics/) を有効にするには、`hugo.yaml` で `services.googleAnalytics.ID` フラグを設定します：
+To enable [Google Analytics](https://marketingplatform.google.com/about/analytics/), set `services.googleAnalytics.ID` flag in `hugo.yaml`:
 
 ```yaml {filename="hugo.yaml"}
 services:
@@ -366,25 +373,64 @@ services:
     ID: G-MEASUREMENT_ID
 ```
 
-### Google 検索インデックス
+### Google Search Index
 
-ページを [Google 検索のインデックスからブロック](https://developers.google.com/search/docs/crawling-indexing/block-indexing) するには、ページのフロントマターで `noindex` を true に設定します：
+To [block Google Search](https://developers.google.com/search/docs/crawling-indexing/block-indexing) from indexing a page, set `noindex` to true in your page frontmatter:
 
 ```yaml
-title: 設定（アーカイブ版）
+title: Configuration (archive version)
 params:
   noindex: true
 ```
 
-ディレクトリ全体を除外するには、親の `_index.md` ファイルで [`cascade`](https://gohugo.io/configuration/cascade/) キーを使用します。
+To exclude an entire directory, use the [`cascade`](https://gohugo.io/configuration/cascade/) key in the parent `_index.md` file.
 
 > [!NOTE]
-> 検索クローラーをブロックするには、[`robots.txt` テンプレート](https://gohugo.io/templates/robots/) を作成できます。
-> ただし、`robots.txt` の指示は必ずしも Google 検索結果からページを除外するわけではありません。
+> To block search crawlers, you can make a [`robots.txt` template](https://gohugo.io/templates/robots/).
+> However, `robots.txt` instructions do not necessarily keep a page out of Google search results.
 
-### LLMS.txt サポート
+### Umami Analytics
 
-サイトの [大規模言語モデル](https://ja.wikipedia.org/wiki/大規模言語モデル) や AI エージェント向けの構造化テキストアウトラインを提供する [llms.txt](https://llmstxt.org/) 出力形式を有効にするには、サイトの `hugo.yaml` に `llms` 出力形式を追加します：
+To enable [Umami](https://umami.is/docs/), set `params.analytics.umami.serverURL` and `params.analytics.umami.websiteID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    umami:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+      # scriptName: "umami.js" # optional (default: umami.js)
+      # https://umami.is/docs/tracker-configuration#data-host-url
+      # hostURL: "http://stats.example.org" # optional
+      # https://umami.is/docs/tracker-configuration#data-auto-track
+      # autoTrack: "false" # optional
+      # https://umami.is/docs/tracker-configuration#data-tag
+      # domains: "example.net,example.org" # optional
+      # https://umami.is/docs/tracker-configuration#data-exclude-search
+      # tag: "umami-eu" # optional
+      # https://umami.is/docs/tracker-configuration#data-exclude-hash
+      # excludeSearch: "true" # optional
+      # https://umami.is/docs/tracker-configuration#data-do-not-track
+      # excludeHash: "true" # optional
+      # https://umami.is/docs/tracker-configuration#data-domains
+      # doNotTrack: "true" # optional
+```
+
+### Matomo Analytics
+
+To enable [Matomo](https://matomo.org/), set `params.analytics.matomo.URL` and `params.analytics.matomo.ID` flag in `hugo.yaml`:
+
+```yaml {filename="hugo.yaml"}
+params:
+  analytics:
+    matomo:
+      serverURL: "https://example.com"
+      websiteID: "94db1cb1-74f4-4a40-ad6c-962362670409"
+```
+
+### LLMS.txt Support
+
+To enable [llms.txt](https://llmstxt.org/) output format for your site, which provides a structured text outline for [large language models](https://en.wikipedia.org/wiki/Large_language_model) and AI agents, add the `llms` output format to your site's `hugo.yaml`:
 
 ```diff {filename="hugo.yaml"}
 outputs:
@@ -394,27 +440,55 @@ outputs:
   section: [html, rss]
 ```
 
-これにより、サイトのルートに `llms.txt` ファイルが生成され、以下が含まれます：
+This will generate an `llms.txt` file at your site's root containing:
 
-- サイトタイトルと説明
-- すべてのセクションとページの階層リスト
-- ページの要約と公開日
-- すべてのコンテンツへの直接リンク
+- Site title and description
+- Hierarchical listing of all sections and pages
+- Page summaries and publication dates
+- Direct links to all content
 
-llms.txt ファイルはコンテンツ構造から自動生成され、AI ツールや言語モデルがコンテキストや参照のためにあなたのサイトにアクセスしやすくします。
+The llms.txt file is automatically generated from your content structure and makes your site more accessible to AI tools and language models for context and reference.
 
 ### Open Graph
 
-ページに [Open Graph](https://ogp.me/) メタデータを追加するには、フロントマターの params に値を追加します。
+To add [Open Graph](https://ogp.me/) metadata to a page, add values in the frontmatter params.
 
-ページは複数の `image` と `video` タグを持つことができるため、それらの値は配列に配置します。
-他の Open Graph プロパティは単一の値のみを持つことができます。
-例えば、このページには `og:image` タグ（ソーシャルシェアでプレビューする画像を設定）と `og:audio` タグがあります。
+As a page can have multiple `image` and `video` tags, place their values in an array.
+Other Open Graph properties can have only one value.
+For example, this page has an `og:image` tag (which configures an image to preview on social shares) and an `og:audio` tag.
 
 ```yaml {filename="content/docs/guide/configuration.md"}
-title: "設定"
+title: "Configuration"
 params:
   images:
     - "/img/config-image.jpg"
   audio: "config-talk.mp3"
+```
+
+### Banner
+
+To add a banner to your site, add the following to your `hugo.yaml`:
+
+```yaml
+params:
+  banner:
+    key: 'announcement-xxx'
+    message: |
+      🎉 Welcome! [Hextra](https://github.com/hextra/hextra) is a static site generator that helps you build modern websites.
+```
+
+The banner will be displayed on all pages.
+
+The field `message` supports Markdown syntax.
+
+If you want to use template syntax, you can define the partial in `layouts/_partials/custom/banner.html`.
+In this case, the field `message` will be ignored.
+
+### External Link Decoration
+
+Adds an arrow icon to external links (default: false) when rendering links from Markdown.
+
+```yaml
+params:
+  externalLinkDecoration: true
 ```
