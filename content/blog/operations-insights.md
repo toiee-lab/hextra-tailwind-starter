@@ -67,16 +67,16 @@ Hugoの組み込み画像処理機能により、自動的にWebP変換とレス
 
 ```css
 /* カスタム改善 */
-.tl-mobile-nav-improved {
-  @apply tl-bg-blue-500 tl-text-white tl-p-3 tl-rounded-lg tl-shadow-md;
+.mobile-nav-improved {
+  @apply bg-blue-500 text-white p-3 rounded-lg shadow-md;
 }
 
-.tl-search-enhanced {
-  @apply tl-w-full tl-max-w-md tl-text-lg tl-p-2;
+.search-enhanced {
+  @apply w-full max-w-md text-lg p-2;
 }
 
-.tl-code-responsive {
-  @apply tl-text-sm tl-overflow-x-auto tl-whitespace-pre-wrap;
+.code-responsive {
+  @apply text-sm overflow-x-auto whitespace-pre-wrap;
 }
 ```
 

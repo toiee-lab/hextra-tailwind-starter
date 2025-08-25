@@ -8,7 +8,7 @@ This file provides guidance for Claude Code (claude.ai/code) when working with t
 
 ### Tech Stack
 - **Static Site Generator**: Hugo with Hextra theme (as module)
-- **Styling**: Tailwind CSS v3.4.3 with `tl-` prefix for custom styles
+- **Styling**: Tailwind CSS v4.1.12 with standard classes for custom styles
 - **Search**: Built-in FlexSearch
 - **Deploy**: Netlify (auto-deploy on main branch push)
 
@@ -59,7 +59,7 @@ toc: true               # Table of contents
 
 ### Standard vs Custom
 - **Standard**: Use Hextra theme + Markdown
-- **Custom**: Use `tl-` prefixed Tailwind classes in rawhtml
+- **Custom**: Use standard Tailwind classes in rawhtml
 
 ### Custom Design Example
 
@@ -67,50 +67,46 @@ At first, set `layout: landing` into Front Matter.
 
 ```html
 {{< rawhtml >}}
-<div class="tl-hero-section tl-p-6">
-  <h3 class="tl-text-xl tl-font-bold">Feature</h3>
+<div class="hero-section p-6">
+  <h3 class="text-xl font-bold">Feature</h3>
 </div>
 {{< /rawhtml >}}
 ```
 
 Custom Design is "自由にデザイン" in Japanese.
 
-**Note**: Responsive prefixes don't use `tl-`:
-- ✅ Correct: `md:tl-grid-cols-2`
-- ❌ Wrong: `tl-md:tl-grid-cols-2`
+**Note**: Use standard responsive prefixes:
+- ✅ Correct: `md:grid-cols-2`
+- ✅ Correct: `hover:scale-105`
 
-## ⚠️ Tailwind CSS Critical Configuration
+## 🎨 Tailwind CSS Configuration
 
-### preflight: false の影響
-**重要**: `tailwind.config.js`で`preflight: false`が設定されているため、多くの標準Tailwindクラスが自動生成されません。
+### Tailwind CSS v4 Integration
+このプロジェクトはTailwind CSS v4.1.12を使用し、Hextra v0.10.2との互換性を保ちながら標準クラスを使用できます。
 
-### 手動追加が必要なクラス
-新しいTailwindクラスを使用する場合は、必ず`assets/css/tailwind-enhanced.css`に定義を追加してください：
-
-#### よく使うが追加が必要なクラス
+### よく使用するクラス
 - **グラデーション**: 
-  - `tl-bg-gradient-to-*` (br, r, b, l, t など)
-  - `tl-from-*`, `tl-to-*`, `tl-via-*` (色指定)
+  - `bg-gradient-to-*` (br, r, b, l, t など)
+  - `from-*`, `to-*`, `via-*` (色指定)
 - **テキストグラデーション**:
-  - `tl-bg-clip-text`, `tl-text-transparent`
+  - `bg-clip-text`, `text-transparent`
 - **アニメーション**:
-  - `tl-animate-*` (bounce, pulse, spin, fade-in など)
+  - `animate-*` (bounce, pulse, spin など)
 - **トランスフォーム**:
-  - `tl-rotate-*`, `tl-scale-*`, `tl-translate-*`
+  - `rotate-*`, `scale-*`, `translate-*`
 - **その他の効果**:
-  - `tl-backdrop-blur-*`, `tl-mix-blend-*`
+  - `backdrop-blur-*`, `mix-blend-*`
 
 ### 新しいページ/コンポーネント作成時のチェックリスト
-1. 使用するTailwindクラスをリストアップ
-2. `tailwind-enhanced.css`で定義確認
-3. 不足クラスをCSSファイルに追加
-4. `npm run build`でCSSをビルド
-5. ブラウザで表示確認
+1. 標準的なTailwindクラスを使用
+2. Hextraの`hx:`プレフィックスとの競合を避ける
+3. `npm run build:css`でCSSをビルド
+4. ブラウザで表示確認
 
 ### トラブルシューティング
-- **クラスが効かない場合**: `tailwind-enhanced.css`を確認
-- **ビルド後も反映されない**: `hugo_stats.json`をチェック
-- **開発時のヒント**: よく使うパターンは事前定義しておく
+- **クラスが効かない場合**: Hugo statsファイル（`hugo_stats.json`）にクラスが含まれているかチェック
+- **ビルド後も反映されない**: PostCSSの処理を確認
+- **Hextraとの競合**: Hextraは`hx:`と`hextra-`プレフィックスを使用
 
 ## Hextra Shortcodes
 
@@ -126,6 +122,8 @@ Add hidden keywords for search:
 <span class="hx:sr-only">keywords for search</span>
 {{< /rawhtml >}}
 ```
+
+**注**: Hextraのクラス（`hx:`プレフィックス）はそのまま使用してください。
 
 ## Configuration (hugo.yaml)
 

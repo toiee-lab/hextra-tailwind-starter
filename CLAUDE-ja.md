@@ -13,7 +13,7 @@
 ## 🌟 特徴
 
 - **Hextraテーマ**: 美しいドキュメントサイト用テーマ
-- **Tailwind CSS統合**: `tl-`プレフィックスでカスタムデザイン
+- **Tailwind CSS統合**: カスタムデザイン
 - **Claude Code最適化**: 専用エージェントと権限設定
 - **FlexSearch**: 高速全文検索機能
 - **レスポンシブデザイン**: 全デバイス対応
@@ -59,14 +59,14 @@ module:
 | 用途 | 手法 | プレフィックス | 使用場所 |
 |------|------|-------------|---------|
 | **標準デザイン** | Hextraテーマ + Markdown | なし | 通常のコンテンツ |
-| **独自デザイン** | Tailwind CSS v3.4.3 + カスタムCSS | `tl-` | rawhtml内、landingレイアウト推奨 |
+| **独自デザイン** | Tailwind CSS v4 + カスタムCSS | `` | rawhtml内、landingレイアウト推奨 |
 
 ### 独自デザイン使用例
 ```html
 {{< rawhtml >}}
-<div class="tl-hero-section tl-gradient-primary">
-  <h1 class="tl-title-hero tl-text-glow">独自デザイン</h1>
-  <p class="tl-subtitle-large">tl-プレフィックスで特別なスタイリング</p>
+<div class="hero-section gradient-primary">
+  <h1 class="title-hero text-glow">独自デザイン</h1>
+  <p class="subtitle-large">プレフィックスで特別なスタイリング</p>
 </div>
 {{< /rawhtml >}}
 ```
@@ -239,21 +239,17 @@ linkTitle: "短縮タイトル"  # パンくずリスト用
 
 ## HTMLとTailwind CSSを使ったカスタムデザイン
 
-自由にデザインする、landing レイアウトを使うページでは、rawhtmlショートコードを使用して、`tl-` プレフィックス付きのTailwind CSSでデザインする。
+自由にデザインする、landing レイアウトを使うページでは、rawhtmlショートコードを使用して、Tailwind CSS v4 (NOT v3)でデザインする。
 
 ```html
 {{< rawhtml >}}
-<div class="tl-feature-card tl-shadow-lg tl-rounded-lg tl-p-6">
-  <h3 class="tl-text-xl tl-font-bold tl-mb-4">機能名</h3>
-  <p class="tl-text-gray-600">機能説明</p>
+<div class="feature-card shadow-lg rounded-lg p-6">
+  <h3 class="text-xl font-bold mb-4">機能名</h3>
+  <p class="text-gray-600">機能説明</p>
 </div>
 {{< /rawhtml >}}
 ```
 
-なお、TailwindCSSでは、レスポンシブプレフィックスには `tl-` は付けません。
-
-- 正解: `md:tl-grid-cols-2`
-- 間違い: `tl-md:tl-grid-cols-2` 
 
 ## 検索最適化
 

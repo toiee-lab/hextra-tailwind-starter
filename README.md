@@ -10,7 +10,7 @@ Claude CodeでHugoサイトを構築するための、すぐに使えるスタ�
 ## ✨ 特徴
 
 - **Hugo + Hextra**: モダンなドキュメントサイト用テーマ
-- **Tailwind CSS 統合**: `tl-`プレフィックスでカスタムスタイリング
+- **Tailwind CSS 統合**: カスタムスタイリング
 - **Claude Code対応**: 専用エージェントと権限設定済み
 - **FlexSearch**: 高速全文検索機能内蔵
 - **レスポンシブ**: モバイル・タブレット・デスクトップ対応
@@ -120,7 +120,7 @@ project/
 
 ## 🎨 Tailwind CSS カスタマイゼーション
 
-このスターターキットでは`tl-`プレフィックス付きのTailwind CSSクラスを使用します。
+このスターターキットではTailwind CSS v4のクラスを使用します。
 
 ### 基本的な使い方
 
@@ -128,7 +128,7 @@ layout に landing を指定します。
 
 ```html
 {{< rawhtml >}}
-<div class="tl-bg-blue-500 tl-text-white tl-p-4 tl-rounded-lg">
+<div class="bg-blue-500 text-white p-4 rounded-lg">
   カスタムデザイン要素
 </div>
 {{< /rawhtml >}}

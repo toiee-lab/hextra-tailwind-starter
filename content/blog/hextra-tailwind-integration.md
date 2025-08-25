@@ -17,7 +17,7 @@ weight: 20
 ```javascript
 // tailwind.config.js
 module.exports = {
-  prefix: 'tl-',
+  // No prefix needed for Tailwind v4 and Hextra compatibility
   content: [
     './content/**/*.md',
     './layouts/**/*.html',
@@ -31,25 +31,25 @@ module.exports = {
 }
 ```
 
-`tl-`プレフィックスにより、Tailwind CSSクラスが既存テーマと衝突しません。
+Tailwind CSS v4とHextra v0.10+では、適切な名前空間により衝突を回避できます。
 
 ## デザインシステムの階層化
 
 | レイヤー | 用途 | 実装 |
 |---------|------|------|
 | **ベース** | Hextraテーマのデフォルト | 通常のMarkdown |
-| **拡張** | カスタムコンポーネント | `tl-`プレフィックス付きクラス |
+| **拡張** | カスタムコンポーネント | 標準Tailwindクラス |
 | **特別** | ランディングページ | フルカスタムHTML |
 
 ### 実際の使用例
 
 ```html
 {{< rawhtml >}}
-<div class="tl-bg-gradient-to-r tl-from-blue-500 tl-to-purple-600 tl-p-8 tl-rounded-lg">
-  <h3 class="tl-text-white tl-text-2xl tl-font-bold">
+<div class="bg-gradient-to-r from-blue-500 to-purple-600 p-8 rounded-lg">
+  <h3 class="text-white text-2xl font-bold">
     カスタムヒーローセクション
   </h3>
-  <p class="tl-text-blue-100 tl-mt-4">
+  <p class="text-blue-100 mt-4">
     Hextraの美しさとTailwindの柔軟性を両立
   </p>
 </div>

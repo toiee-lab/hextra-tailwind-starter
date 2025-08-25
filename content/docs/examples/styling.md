@@ -5,4 +5,4 @@ type: docs
 ---
 
 Tailwind CSSを使ったカスタムスタイリングの実例とテクニックです。
-`rawhtml`ショートコードと`tl-`プレフィックスの効果的な使用例を紹介します。
+`rawhtml`ショートコードと、 Tailwind CSS v4 の効果的な使用例を紹介します。
