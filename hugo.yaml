@@ -89,7 +89,8 @@ params:
       # hover | always
       display: hover
   theme:
-    displayToggle: true
+    default: light
+    displayToggle: false
 
   blog:
     list:
