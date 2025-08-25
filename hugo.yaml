@@ -26,27 +26,37 @@ markup:
 
 menu:
   main:
-    - identifier: sdk
-      name: Ref
+    - name: Docs
+      pageRef: /docs
       weight: 1
-    - identifier: go
-      name: Hextra ↗
-      url: https://imfing.github.io/hextra/
-      parent: sdk
+    - name: About
+      pageRef: /about
       weight: 2
+    - name: Blog
+      pageRef: /blog
+      weight: 3
+    - identifier: reference
+      name: 参考
+      weight: 4
     - identifier: hugo
       name: Hugo ↗
       url: https://gohugo.io/
-      parent: sdk
-      weitght: 1
-    - name: Docs
-      pageRef: /docs
+      parent: reference
+      weight: 1
+    - identifier: hextra
+      name: Hextra ↗
+      url: https://imfing.github.io/hextra/
+      parent: reference
       weight: 2
-    - name: About
-      pageRef: /about
+    - identifier: tailwind
+      name: Tailwind CSS ↗
+      url: https://tailwindcss.com/
+      parent: reference
       weight: 3
-    - name: Blog
-      pageRef: /blog
+    - identifier: claude-code
+      name: Claude Code ↗
+      url: https://docs.anthropic.com/en/docs/claude-code/overview
+      parent: reference
       weight: 4
     - name: Search
       weight: 5
