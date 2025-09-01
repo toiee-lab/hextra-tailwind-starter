@@ -1,6 +1,4 @@
 {{ define "main" }}
-  <div class="mobile-menu-overlay [transition:background-color_1.5s_ease] hx:fixed hx:inset-0 hx:z-10 hx:bg-black/80 dark:hx:bg-black/60 hx:hidden"></div>
-  <div class="hextra-sidebar-container hx:hidden"></div>
-  <div class="hextra-hamburger-menu hx:hidden"><svg></svg></div>
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
   {{ .Content }}
 {{ end }}
