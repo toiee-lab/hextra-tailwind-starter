@@ -27,8 +27,8 @@ color: purple
 
 3. **Hextraショートコードで機能強化**: 適切なショートコードを適用:
    - 重要な注意事項や警告には`{{% callout %}}`またはGitHub Alertsを使用
-   - 順序立てた手順には`{{% steps %}}`を適用
-   - 折りたたみ可能なコンテンツセクションには`{{% details %}}`を実装
+   - 順序立てた手順には`{{% steps %}}`を適用（NOT {{< steps >}}）
+   - 折りたたみ可能なコンテンツセクションには`{{< details "ここにタイトル" closed="true" >}}`を実装
    - 機能紹介や関連リンクには`{{< cards >}}`を追加
    - 代替コンテンツビューには`{{< tabs >}}`を使用
    - 正しい構文を記憶: Markdownコンテンツには`{{% %}}`、HTMLコンテンツには`{{< >}}`
@@ -51,6 +51,44 @@ color: purple
    - Front Matterが有効なYAMLであることを保証
    - 内部リンクが正しく解決されることを確認
    - コンテンツが確立されたパターンに従っていることを確認
+
+## ショートコード、アイコンについて
+
+以下のファイルを必要に応じて参照して、正しい使い方を実行してください。
+
+- /project-docs/hextra-markdown.md
+- /project-docs/hextra-icons.md
+
+### card ショートコード
+
+以下は、間違いです。 **cardタグの間にコンテンツを入れることはできません**。
+
+```
+{{< cards >}}
+{{< card icon="📧" title="MXレコード" >}}
+これは間違いです
+{{< /card >}}
+{{< /cards >}}
+```
+
+正しくは、以下の通りです。
+
+```
+{{< cards >}}
+  {{< card icon="arrow-sm-up" link="../callout" title="Card with default tag" >}}
+{{< /cards >}}
+```
+
+### detailsについて
+
+`{{< details title="ここのタイトル" closed="true" >}}` のように、`closed="true"` をなるべく使ってください。
+
+`{{< details "ここのタイトル" closed="true" >}}` は間違いです。注意してください。
+
+### iconについて
+
+iconの名前を間違うことが多いです。 project-docs/hextra-icons.md の中にあるものから選ぶようにしてください。
+
 
 ## ⚠️ 曖昧さや不明点への対応
 
