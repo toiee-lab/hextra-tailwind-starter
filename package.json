@@ -1,24 +1,26 @@
 {
-  "name": "hextra-tailwind-starter",
-  "version": "1.0.0",
-  "description": "Hugo + Hextra + Tailwind CSS starter kit for Claude Code",
-  "scripts": {
-    "dev": "hugo server --logLevel debug --disableFastRender -p 1313 --noHTTPCache",
-    "build": "hugo --gc --minify",
-    "build:css": "npx postcss --config postcss.config.js --env production assets/css/tailwind-enhanced.css -o assets/css/compiled/tailwind-enhanced.css"
-  },
-  "keywords": [
-    "hugo",
-    "hextra",
-    "tailwindcss",
-    "claude-code",
-    "static-site-generator"
-  ],
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.12",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
-    "tailwindcss": "^4.1.12"
-  }
+	"name": "hextra-tailwind-starter",
+	"version": "1.0.0",
+	"description": "Hugo + Hextra + Tailwind CSS starter kit for Claude Code",
+	"scripts": {
+		"dev": "hugo server --logLevel debug --disableFastRender -p 1313 --noHTTPCache",
+		"build": "hugo --gc --minify",
+		"build:css": "npx postcss --config postcss.config.js --env production assets/css/tailwind-enhanced.css -o assets/css/compiled/tailwind-enhanced.css"
+	},
+	"keywords": [
+		"hugo",
+		"hextra",
+		"tailwindcss",
+		"claude-code",
+		"static-site-generator"
+	],
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.1.12",
+		"autoprefixer": "^10.4.19",
+		"postcss": "^8.4.38",
+		"postcss-cli": "^11.0.0",
+		"tailwindcss": "^4.1.12",
+		"unsplash-js": "^7.0.19",
+		"dotenv": "^16.4.5"
+	}
 }

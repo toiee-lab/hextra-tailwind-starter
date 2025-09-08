@@ -119,7 +119,7 @@ A built-in component to show important information to the reader.
 | `icon`     | Name of the icon.                                               |
 | `tag`      | Text in tag.                                                    |
 | `tagColor` | Color of the tag: `gray` (default), `yellow`, `red` and `blue`. |
-  
+
 ## Image Card
 
 Additionally, the card supports adding image and processing through these parameters:
@@ -210,25 +210,6 @@ This will be hidden by default.
 
 {{< /details >}}
 
-## Usage
-
-````markdown
-{{%/* details title="Details" */%}}
-
-This is the content of the details.
-
-Markdown is **supported**.
-
-{{%/* /details */%}}
-````
-
-````markdown
-{{%/* details title="Click me to reveal" closed="true" */%}}
-
-This will be hidden by default.
-
-{{%/* /details */%}}
-````
 # FileTree Component
 
 ## Example
@@ -268,7 +249,7 @@ To use this shortcode inline, inline shortcode needs to be enabled in the config
 enableInlineShortcodes: true
 ```
 
-List of available icons can be found in [`data/icons.yaml`](https://github.com/imfing/hextra/blob/main/data/icons.yaml).
+List of available icons can be found in `project-docs/hextra-icons.md`
 
 <!--more-->
 
@@ -1335,4 +1316,3 @@ params:
 ## Supported Languages
 
 For a list of supported languages, please see the [Chroma documentation](https://github.com/alecthomas/chroma#supported-languages).
-
