@@ -128,6 +128,59 @@ Custom Design is "自由にデザイン" in Japanese.
 - Pay attention to `card` and `details` syntax
 - Use icons from `project-docs/hextra-icons.md` or emojis
 
+## Icon Validation Workflow
+
+**IMPORTANT**: Always validate icon names before using them to prevent errors from non-existent icons.
+
+### Validation Process
+
+1. **Before using icons**: Invoke the `hextra-icon-validator` skill to validate icon names
+2. **If validation passes**: Use the icon with confidence
+3. **If validation fails**:
+   - Review the error message with available similar icon names
+   - Replace invalid icons with valid alternatives from suggestions
+   - Consider the context to choose the most appropriate alternative
+   - Update the code with the correct icon name
+
+### Icon Usage Patterns
+
+```markdown
+<!-- Shortcode syntax -->
+{{</* icon "github" */>}}
+
+<!-- Partial syntax -->
+{{ partial "utils/icon.html" (dict "name" "github" "attributes" "height=24") }}
+```
+
+### Validation Examples
+
+**Valid icon**:
+```
+✓ Icon "github" is valid and available in Hextra theme.
+```
+
+**Invalid icon with suggestions**:
+```
+✗ Icon "githubs" is not available in Hextra theme.
+
+Did you mean one of these?
+  - github
+  - gitlab
+  - gitea
+```
+
+### Helper Script Usage
+
+You can also validate icons manually using the helper script:
+
+```bash
+node .claude/skills/hextra-icon-validator/icon-search.js github gitlab
+```
+
+### Available Icons
+
+For the complete list of available icons, refer to `project-docs/hextra-icons.md` (263 icons available).
+
 ## Search Optimization
 
 Add hidden keywords for search:
