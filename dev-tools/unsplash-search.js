@@ -9,8 +9,11 @@ import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// プロジェクトルートの.env.localを読み込む
-config({ path: join(__dirname, '..', '.env.local') });
+// 環境変数が設定されていない場合のみ .env.local を読み込む
+// システム環境変数を優先、なければ .env.local から読み込む
+if (!process.env.UNSPLASH_ACCESS_KEY) {
+  config({ path: join(__dirname, '..', '.env.local') });
+}
 
 /**
  * Unsplash画像検索クラス
@@ -170,7 +173,12 @@ async function main() {
 }
 
 // スクリプトが直接実行された場合のみmain()を呼び出し
-if (import.meta.url === `file://${process.argv[1]}`) {
+// ESモジュールでの実行判定（より確実な方法）
+const isMainModule = import.meta.url === new URL(process.argv[1], 'file:').href ||
+                     import.meta.url.endsWith(process.argv[1]) ||
+                     process.argv[1]?.includes('unsplash-search.js');
+
+if (isMainModule) {
   main();
 }
 
