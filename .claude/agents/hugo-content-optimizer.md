@@ -61,23 +61,84 @@ color: purple
 
 ### card ショートコード
 
-以下は、間違いです。 **cardタグの間にコンテンツを入れることはできません**。
+cardショートコードは**セルフクロージングタグ**です。コンテンツを含めることはできません。
 
-```
+#### ❌ よくある間違い
+
+**間違い1: タグの間にコンテンツを入れる**
+```markdown
 {{< cards >}}
 {{< card icon="📧" title="MXレコード" >}}
-これは間違いです
+ここにコンテンツを入れることはできません
 {{< /card >}}
 {{< /cards >}}
 ```
 
-正しくは、以下の通りです。
-
-```
+**間違い2: linkパラメータなしでカードを作成**
+```markdown
 {{< cards >}}
-  {{< card icon="arrow-sm-up" link="../callout" title="Card with default tag" >}}
+{{< card title="タイトルだけ" >}}
 {{< /cards >}}
 ```
+
+**間違い3: iconに絵文字を使用（スタイルが崩れる可能性）**
+```markdown
+{{< cards >}}
+{{< card icon="📧" title="メール" link="/docs/email" >}}
+{{< /cards >}}
+```
+
+#### ✅ 正しい使い方
+
+**基本的な使い方**
+```markdown
+{{< cards >}}
+  {{< card link="/docs/getting-started" title="はじめに" icon="rocket" >}}
+  {{< card link="/docs/configuration" title="設定" icon="cog" >}}
+  {{< card link="/docs/deployment" title="デプロイ" icon="upload" >}}
+{{< /cards >}}
+```
+
+**サブタイトル付き**
+```markdown
+{{< cards >}}
+  {{< card link="/docs/api" title="API リファレンス" subtitle="REST APIの詳細なドキュメント" icon="code" >}}
+  {{< card link="/docs/sdk" title="SDK" subtitle="各種言語のSDK" icon="puzzle" >}}
+{{< /cards >}}
+```
+
+**外部リンク**
+```markdown
+{{< cards >}}
+  {{< card link="https://github.com/your-repo" title="GitHub" icon="github" >}}
+  {{< card link="https://discord.gg/your-server" title="Discord" icon="chat" >}}
+{{< /cards >}}
+```
+
+**アイコンなし（テキストのみ）**
+```markdown
+{{< cards >}}
+  {{< card link="/docs/page1" title="ページ1" >}}
+  {{< card link="/docs/page2" title="ページ2" >}}
+{{< /cards >}}
+```
+
+#### 📝 パラメータ一覧
+
+| パラメータ | 必須 | 説明 | 例 |
+|----------|------|------|-----|
+| `link` | ✅ はい | リンク先URL（相対パスまたは絶対パス） | `/docs/page` または `https://example.com` |
+| `title` | ✅ はい | カードのタイトル | `"はじめに"` |
+| `icon` | ❌ いいえ | アイコン名（`project-docs/hextra-icons.md`参照） | `"rocket"` |
+| `subtitle` | ❌ いいえ | サブタイトル（補足説明） | `"詳細なガイド"` |
+| `image` | ❌ いいえ | 画像URL | `"/images/thumbnail.jpg"` |
+
+#### 💡 ベストプラクティス
+
+1. **アイコンは必ず検証する**: 使用前に`hextra-icon-validator`スキルで検証
+2. **内部リンクには相対パスを使用**: `/docs/page` の形式
+3. **カードは2〜4枚が理想**: 多すぎると見づらくなる
+4. **統一感を持たせる**: 同じグループのカードは同じスタイル（アイコンあり/なし）で統一
 
 ### detailsについて
 

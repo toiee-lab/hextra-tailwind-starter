@@ -2,7 +2,8 @@
 
 > [!NOTE]
 > [デモはこちら](https://hextra-tailwind-starter.netlify.app/)
-> 現在は、v0.3
+> Starter Kit Version: v0.4
+> Hextra Theme: v0.10.2 | Tailwind CSS: v4.1.12
 
 
 Claude CodeでHugoサイトを構築するための、すぐに使えるスターターキットです。HextraテーマとTailwind CSSを統合し、効率的な開発環境を提供します。
@@ -22,8 +23,8 @@ Claude CodeでHugoサイトを構築するための、すぐに使えるスタ�
 | 項目 | 技術 | バージョン |
 |------|------|-----------|
 | 静的サイト生成 | Hugo | Latest |
-| テーマ | Hextra | v0.9.7 |
-| CSS フレームワーク | Tailwind CSS | ^3.4.3 |
+| テーマ | Hextra | v0.10.2 |
+| CSS フレームワーク | Tailwind CSS | v4.1.12 |
 | ビルドツール | PostCSS | ^8.4.38 |
 | 検索 | FlexSearch | 内蔵 |
 
@@ -33,9 +34,25 @@ Claude CodeでHugoサイトを構築するための、すぐに使えるスタ�
 
 最初に英語名でプロジェクト名を決めて下さい。例えば、 toiee.jp のサイトを作る予定なら、シンプルに「toiee-jp」などです。
 
+#### 方法A: セットアップスクリプトを使用（推奨）
+
 ```bash
 # リポジトリをクローン
-git clone https://github.com/toiee-lab/hextra-tailwind-starter.git projectname 
+git clone https://github.com/toiee-lab/hextra-tailwind-starter.git projectname
+cd projectname
+
+# セットアップスクリプトを実行
+./setup.sh projectname
+
+# または対話的に実行
+./setup.sh
+```
+
+#### 方法B: 手動セットアップ
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/toiee-lab/hextra-tailwind-starter.git projectname
 cd projectname
 
 # リモート接続を削除
@@ -48,6 +65,9 @@ hugo mod tidy
 
 # Node.js 依存関係をインストール
 npm install
+
+# .env.localを作成
+cp .env.local.example .env.local
 
 # 起動テスト
 npm run dev
@@ -280,6 +300,116 @@ FlexSearchが自動で設定されており、以下の要素をインデック�
 <span class="hx:sr-only">検索用キーワード Claude AI Hugo 開発</span>
 {{< /rawhtml >}}
 ```
+
+## 🔧 トラブルシューティング
+
+### よくある問題と解決方法
+
+#### 1. Hugoモジュールのエラー
+
+**症状**: `module "github.com/imfing/hextra" not found` などのエラー
+
+**解決方法**:
+```bash
+hugo mod clean
+hugo mod get -u
+hugo mod tidy
+```
+
+#### 2. Tailwind CSSクラスが効かない
+
+**症状**: 追加したTailwindクラスがブラウザで反映されない
+
+**解決方法**:
+```bash
+# 1. Hugo statsファイルを確認
+cat hugo_stats.json | grep "your-class-name"
+
+# 2. CSSを再ビルド
+npm run build:css
+
+# 3. Hugoサーバーを再起動
+npm run dev
+
+# 4. ブラウザのキャッシュをクリア
+# Chrome: Cmd+Shift+R (Mac) / Ctrl+Shift+R (Windows)
+```
+
+**チェックポイント**:
+- `hugo.yaml` で `build.writeStats: true` が設定されているか確認
+- `hugo_stats.json` にクラス名が含まれているか確認
+- Hextraの `hx:` プレフィックスと競合していないか確認
+
+#### 3. アイコンが表示されない
+
+**症状**: `{{< icon "name" >}}` が正しく表示されない
+
+**解決方法**:
+```bash
+# アイコン名を検証
+npm run validate:icons
+
+# または手動で確認
+node .claude/skills/hextra-icon-validator/icon-search.js icon-name
+```
+
+**参考**: 利用可能なアイコン一覧は `project-docs/hextra-icons.md` を確認
+
+#### 4. Unsplash画像が取得できない
+
+**症状**: `dev-tools/unsplash-search.js` がエラーを返す
+
+**解決方法**:
+```bash
+# 1. .env.localファイルを作成
+cp .env.local.example .env.local
+
+# 2. Unsplash APIキーを設定
+# .env.local を編集して UNSPLASH_ACCESS_KEY を設定
+
+# 3. APIキーの取得方法は .env.local.example を参照
+```
+
+#### 5. ビルドエラー
+
+**症状**: `hugo` または `npm run build` がエラーで失敗
+
+**解決方法**:
+```bash
+# 1. 依存関係を再インストール
+rm -rf node_modules package-lock.json
+npm install
+
+# 2. Hugoモジュールをクリーン
+hugo mod clean
+hugo mod get -u
+
+# 3. キャッシュをクリア
+rm -rf resources public .hugo_build.lock
+
+# 4. 再ビルド
+npm run test
+```
+
+#### 6. 開発サーバーが起動しない
+
+**症状**: `npm run dev` でエラーが発生
+
+**解決方法**:
+```bash
+# ポート1313が使用中の場合
+lsof -ti:1313 | xargs kill -9
+
+# または別のポートで起動
+hugo server -p 1314
+```
+
+### デバッグのヒント
+
+1. **ログを確認**: `npm run dev` の出力を注意深く読む
+2. **段階的にテスト**: 変更を小さく区切って適用する
+3. **検証スクリプト**: `npm run test` でビルドが通ることを確認
+4. **ブラウザ開発ツール**: Consoleとネットワークタブでエラーをチェック
 
 ## 📚 参考リンク
 

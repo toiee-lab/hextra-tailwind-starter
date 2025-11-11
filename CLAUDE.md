@@ -7,7 +7,7 @@ This file provides guidance for Claude Code (claude.ai/code) when working with t
 **Hugo + Hextra + Tailwind CSS** starter kit for modern documentation and blog sites, optimized for Claude Code development.
 
 ### Tech Stack
-- **Static Site Generator**: Hugo with Hextra theme (as module)
+- **Static Site Generator**: Hugo (latest) with Hextra v0.10.2 theme (as module)
 - **Styling**: Tailwind CSS v4.1.12 with standard classes for custom styles
 - **Search**: Built-in FlexSearch
 - **Deploy**: Netlify (auto-deploy on main branch push)
@@ -97,6 +97,27 @@ Custom Design is "自由にデザイン" in Japanese.
 
 ### Tailwind CSS v4 Integration
 このプロジェクトはTailwind CSS v4.1.12を使用し、Hextra v0.10.2との互換性を保ちながら標準クラスを使用できます。
+
+### Tailwind CSS v4の重要な変更点
+
+Tailwind CSS v3からv4への移行に伴う主な変更点:
+
+1. **インポート方式の変更**
+   - `@import "tailwindcss"` は使用しない
+   - 代わりに `@theme` と `@utility` ディレクティブを使用
+
+2. **JITモードがデフォルト**
+   - Just-In-Timeコンパイラが標準搭載
+   - 設定ファイルでの明示的な有効化は不要
+   - 使用されているクラスのみが生成される
+
+3. **カスタマイゼーション**
+   - `tailwind.config.js` の代わりに CSS内で `@theme` ディレクティブを使用
+   - カスタムユーティリティは `@utility` ディレクティブで定義
+
+4. **PostCSS設定**
+   - `@tailwindcss/postcss` プラグインを使用
+   - `postcss.config.js` で適切に設定済み
 
 ### よく使用するクラス
 - **グラデーション**:
