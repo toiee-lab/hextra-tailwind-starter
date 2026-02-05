@@ -37,6 +37,7 @@ This file provides guidance for Claude Code (claude.ai/code) when working with t
 - Use `<!--more-->` for excerpts
 - Prefer Markdown unless custom HTML is explicitly needed
 - Only create documentation files when explicitly requested
+- Steps ショートコードを使う場合、必ず、 `{{% steps %}}` と `{{% /steps %}}` を使い、コンテンツは **Markdown** を使うこと
 
 ### Layouts
 - **docs**: Documentation with sidebar
