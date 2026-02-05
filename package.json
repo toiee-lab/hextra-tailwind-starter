@@ -1,23 +1,29 @@
 {
-	"name": "hextra-tailwind-starter",
+	"name": "claude-web-master-docs-site",
 	"version": "1.0.0",
-	"description": "Hugo + Hextra + Tailwind CSS starter kit for Claude Code",
+	"description": "Hugo + Hextra + Tailwind CSS starter kit for Claude Code with Thinkific integration",
 	"scripts": {
-		"dev": "hugo server --logLevel debug --disableFastRender -p 1313 --noHTTPCache",
+		"dev": "hugo server --logLevel debug --disableFastRender -p 1313 --noHTTPCache --baseURL http://localhost:1313",
+		"dev:cf": "wrangler pages dev public --compatibility-date=2025-01-01",
 		"build": "hugo --gc --minify",
 		"build:css": "npx postcss --config postcss.config.js --env production assets/css/tailwind-enhanced.css -o assets/css/compiled/tailwind-enhanced.css",
 		"search": "node dev-tools/unsplash-search.js",
-		"validate:icons": "node .claude/skills/hextra-icon-validator/icon-search.js",
-		"validate:build": "npm run build:css && hugo --quiet",
-		"test": "npm run validate:build"
+		"test:functions": "node test/test-functions.js",
+		"cf:deploy": "hugo --gc --minify && wrangler pages deploy public",
+		"cf:tail": "wrangler pages deployment tail"
 	},
 	"keywords": [
 		"hugo",
 		"hextra",
 		"tailwindcss",
 		"claude-code",
-		"static-site-generator"
+		"static-site-generator",
+		"thinkific",
+		"cloudflare-pages"
 	],
+	"dependencies": {
+		"@tsndr/cloudflare-worker-jwt": "^3.2.0"
+	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.12",
 		"autoprefixer": "^10.4.19",
@@ -25,6 +31,7 @@
 		"postcss-cli": "^11.0.0",
 		"tailwindcss": "^4.1.12",
 		"unsplash-js": "^7.0.19",
-		"dotenv": "^16.4.5"
+		"dotenv": "^16.4.5",
+		"wrangler": "^4.0.0"
 	}
 }
