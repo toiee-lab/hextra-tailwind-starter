@@ -82,14 +82,14 @@ Custom Design is "自由にデザイン" in Japanese.
 ### Image
 
 ### 画像取得プロセス
-- 画像が提供されていない場合、`unsplash-image-finder`サブエージェントを呼び出してUnsplashから検索
+- 画像が提供されていない場合、`/unsplash-image-finder`スキルを使用してUnsplashから検索
 - Unsplash URLを最適化: `https://images.unsplash.com/[photo-id]?w=800&q=80`
 - 画像リンクが機能していることを常に確認
 - lazy loadingとasync decodingを適用
 
-### unsplash-image-finderサブエージェント
+### unsplash-image-finderスキル
 - Webページ作成・編集時に画像が必要でユーザーから提供されていない場合に使用
-- dev-tools/unsplash-search.jsを利用してUnsplash APIで画像を検索
+- `node dev-tools/unsplash-search.js "keyword"` で画像を検索
 - Claudeの学習データからUnsplash画像を取得しない（リンク切れやハルシネーションを防ぐため）
 
 
@@ -142,12 +142,14 @@ Tailwind CSS v3からv4への移行に伴う主な変更点:
 - **クラスが効かない場合**: Hugo statsファイル（`hugo_stats.json`）にクラスが含まれているかチェック
 - **ビルド後も反映されない**: PostCSSの処理を確認
 - **Hextraとの競合**: Hextraは`hx:`と`hextra-`プレフィックスを使用
+- **検証スキル**: `/tailwind-style-validator` で詳細な検証レポートを生成
 
 ## Hextra Shortcodes
 
 - Refer to `project-docs/hextra-markdown.md` for Hextra-specific shortcodes
 - Pay attention to `card` and `details` syntax
 - Use icons from `project-docs/hextra-icons.md` or emojis
+- `/hugo-content-optimizer` スキルでコンテンツ最適化の推奨事項を確認可能
 
 ## Icon Validation Workflow
 
@@ -213,6 +215,10 @@ Add hidden keywords for search:
 
 **注**: Hextraのクラス（`hx:`プレフィックス）はそのまま使用してください。
 
+### search-keyword-generatorスキル
+- `/search-keyword-generator` でコンテンツを分析し検索キーワードを提案
+- `node .claude/skills/search-keyword-generator/keyword-analyzer.js --file <path>` で直接実行可能
+
 ## Configuration (hugo.yaml)
 
 For navigation, sidebar, footer settings, refer to `project-docs/hextra-configuration.md` when needed.
@@ -245,6 +251,18 @@ params:
 
 See `README.md` for setup instructions.
 
+## Available Skills
+
+This project includes the following skills (invoke with `/skill-name`):
+
+| Skill | Purpose |
+|-------|---------|
+| `/hextra-icon-validator` | Validate icon names before using in shortcodes |
+| `/unsplash-image-finder` | Search and optimize images from Unsplash |
+| `/tailwind-style-validator` | Validate Tailwind classes and check Hugo stats |
+| `/search-keyword-generator` | Analyze content and suggest search keywords |
+| `/hugo-content-optimizer` | Analyze content and suggest Hugo/Hextra optimizations |
+
 ## Key Reminders
 
 1. **NEVER** create files unless absolutely necessary
@@ -253,3 +271,4 @@ See `README.md` for setup instructions.
 4. Use Markdown by default, HTML only when explicitly needed
 5. Check existing code patterns before implementing new features
 6. **ALWAYS** verify Tailwind classes are defined when using custom styles
+7. **USE SKILLS** for validation and analysis tasks (see Available Skills above)
