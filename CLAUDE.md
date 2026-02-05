@@ -273,3 +273,5 @@ This project includes the following skills (invoke with `/skill-name`):
 5. Check existing code patterns before implementing new features
 6. **ALWAYS** verify Tailwind classes are defined when using custom styles
 7. **USE SKILLS** for validation and analysis tasks (see Available Skills above)
+
+use context7
